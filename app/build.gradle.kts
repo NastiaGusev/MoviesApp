@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -14,6 +15,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        compose = true
     }
 
     defaultConfig {
@@ -94,4 +96,5 @@ dependencies {
 
     //Accompanist
     implementation(libs.accompanist.systemuicontroller)
+
 }
