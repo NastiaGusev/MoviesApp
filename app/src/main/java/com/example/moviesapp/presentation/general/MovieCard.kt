@@ -1,6 +1,7 @@
 package com.example.moviesapp.presentation.general
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -17,15 +18,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.moviesapp.R
 import com.example.moviesapp.domain.model.Movie
 import com.example.moviesapp.presentation.ImageConfigState
+import com.example.moviesapp.ui.theme.MoviesAppTheme
 import com.example.moviesapp.util.getYearFromDate
 
 @Composable
@@ -39,10 +43,10 @@ fun MovieCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(0.7f),
+            colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.dark_gray)),
             shape = RoundedCornerShape(15.dp),
-            elevation = CardDefaults.cardElevation(4.dp)
+            elevation = CardDefaults.cardElevation(5.dp)
         ) {
-
             AsyncImage(
                 model = "${imageConfigState.baseUrl}${imageConfigState.posterSize}${movie.poster_path}",
                 contentDescription = movie.title,
@@ -78,6 +82,45 @@ fun MovieCard(
                 color = colorResource(R.color.lightGray)
             )
         }
+    }
+}
+
+@Composable
+fun MovieCardShimmerEffect(modifier: Modifier) {
+    Column(modifier = modifier.padding(top = 5.dp, start = 5.dp, end = 5.dp, bottom = 20.dp)) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(0.7f)
+                .clip(MaterialTheme.shapes.medium)
+                .shimmerEffect(),
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentWidth(Alignment.CenterHorizontally),
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(30.dp)
+                    .clip(MaterialTheme.shapes.medium)
+                    .shimmerEffect(),
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewMovieCardShimmerEffect() {
+    MoviesAppTheme {
+        MovieCardShimmerEffect(
+            modifier = Modifier
+        )
     }
 }
 

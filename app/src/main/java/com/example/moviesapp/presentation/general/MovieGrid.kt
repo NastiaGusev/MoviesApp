@@ -1,9 +1,12 @@
 package com.example.moviesapp.presentation.general
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -57,6 +60,7 @@ fun handlePagingResult(movies: LazyPagingItems<Movie>): Boolean {
 
     return when {
         loadState.refresh is LoadState.Loading -> {
+            ShimmerEffect()
             false
         }
 
@@ -65,5 +69,19 @@ fun handlePagingResult(movies: LazyPagingItems<Movie>): Boolean {
         }
 
         else -> true
+    }
+}
+
+@Composable
+private fun ShimmerEffect() {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(24.dp)
+    ) {
+        items(count = 10) {
+            MovieCardShimmerEffect(
+                modifier = Modifier.padding(horizontal = 24.dp)
+            )
+        }
     }
 }
