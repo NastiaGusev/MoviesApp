@@ -31,7 +31,6 @@ fun MoviesScreen(
 ) {
     Column(
         modifier = Modifier
-            .background(colorResource(id = R.color.black))
             .fillMaxSize()
             .padding(20.dp)
     ) {
