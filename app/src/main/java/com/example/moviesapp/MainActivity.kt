@@ -22,6 +22,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,6 +39,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.example.moviesapp.domain.model.Genre
 import com.example.moviesapp.domain.model.Movie
+import com.example.moviesapp.presentation.MoviesScreen
 import com.example.moviesapp.presentation.MoviesViewModel
 import com.example.moviesapp.presentation.general.GenresRow
 import com.example.moviesapp.presentation.general.MovieCard
@@ -50,35 +52,24 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             val viewModel: MoviesViewModel = hiltViewModel()
             val genresList = viewModel.genres.collectAsState(initial = emptyList()).value
-            val moviesList = viewModel.movies.collectAsLazyPagingItems()
+
+            LaunchedEffect(genresList) {
+                if (genresList.isNotEmpty()) {
+                    viewModel.getMoviesByGenre(genresList.first())
+                }
+            }
 
             MoviesAppTheme {
-                Column(
-                    modifier = Modifier
-                        .background(colorResource(id = R.color.black))
-                        .fillMaxSize()
-                        .padding(20.dp) // Add padding around everything
-                ) {
-                    Text(
-                        text = "Movies",
-                        fontSize = 20.sp,
-                        color = Color.LightGray,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .padding(top = 10.dp, bottom = 20.dp)
-                            .fillMaxWidth()
-                    )
-
-                    GenresRow(genres = genresList)
-
-                    Spacer(modifier = Modifier.height(16.dp)) // Add spacing
-
-                    MovieGrid(moviesList)
-                }
+                MoviesScreen(
+                    genresList = genresList,
+                    moviesState = viewModel.moviesState.value,
+                    getMoviesByGenre = { genre ->
+                        viewModel.getMoviesByGenre(genre)
+                    })
             }
         }
     }

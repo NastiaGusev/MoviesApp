@@ -1,8 +1,7 @@
 package com.example.moviesapp.presentation.general
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,8 +27,8 @@ import com.example.moviesapp.R
 import com.example.moviesapp.domain.model.Movie
 
 @Composable
-fun MovieCard(movie: Movie) {
-    Column {
+fun MovieCard(movie: Movie, onClick: () -> Unit) {
+    Column(modifier = Modifier.clickable { onClick() }) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -54,7 +53,7 @@ fun MovieCard(movie: Movie) {
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.CenterHorizontally),
 
-        ) {
+            ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = movie.title,

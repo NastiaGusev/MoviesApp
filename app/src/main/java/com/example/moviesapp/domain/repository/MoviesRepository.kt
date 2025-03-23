@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 class MoviesRepository(
     private val moviesApi: MoviesApi
 ) {
-
+    
     suspend fun getGenres(): List<Genre> {
         return moviesApi.getGenres().genres
     }
@@ -22,12 +22,13 @@ class MoviesRepository(
         return moviesApi.getConfiguration().images
     }
 
-    fun getMovies(): Flow<PagingData<Movie>> {
+    fun getMovies(genreId: Int): Flow<PagingData<Movie>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
                 MoviesPagingSource(
-                    moviesApi = moviesApi
+                    moviesApi = moviesApi,
+                    genreId = genreId,
                 )
             }
         ).flow

@@ -13,12 +13,12 @@ import androidx.paging.compose.LazyPagingItems
 import com.example.moviesapp.domain.model.Movie
 
 @Composable
-fun MovieGrid(movies: LazyPagingItems<Movie>) {
+fun MovieGrid(movies: LazyPagingItems<Movie>, onClick: (Movie) -> Unit) {
 
     val handlePagingResult = handlePagingResult(movies = movies)
     if (handlePagingResult) {
         LazyVerticalGrid(
-            columns = GridCells.Fixed(2), // 2 Columns
+            columns = GridCells.Fixed(2),
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -26,7 +26,11 @@ fun MovieGrid(movies: LazyPagingItems<Movie>) {
         ) {
             items(count = movies.itemCount) {
                 movies[it]?.let { movie ->
-                    MovieCard(movie)
+                    MovieCard(
+                        movie = movie,
+                        onClick = {
+                            onClick(movie)
+                        })
                 }
             }
         }
