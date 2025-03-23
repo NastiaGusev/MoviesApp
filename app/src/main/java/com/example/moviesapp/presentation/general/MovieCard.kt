@@ -25,9 +25,15 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.moviesapp.R
 import com.example.moviesapp.domain.model.Movie
+import com.example.moviesapp.presentation.ImageConfigState
+import com.example.moviesapp.presentation.MoviesState
 
 @Composable
-fun MovieCard(movie: Movie, onClick: () -> Unit) {
+fun MovieCard(
+    imageConfigState: ImageConfigState,
+    movie: Movie,
+    onClick: () -> Unit
+) {
     Column(modifier = Modifier.clickable { onClick() }) {
         Card(
             modifier = Modifier
@@ -38,7 +44,7 @@ fun MovieCard(movie: Movie, onClick: () -> Unit) {
         ) {
 
             AsyncImage(
-                model = "https://image.tmdb.org/t/p/w185${movie.poster_path}",
+                model = "${imageConfigState.baseUrl}${imageConfigState.posterSize}${movie.poster_path}",
                 contentDescription = movie.title,
                 modifier = Modifier.fillMaxWidth(),
                 contentScale = ContentScale.FillBounds

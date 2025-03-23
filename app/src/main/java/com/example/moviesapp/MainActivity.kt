@@ -67,6 +67,7 @@ class MainActivity : ComponentActivity() {
                 MoviesScreen(
                     genresList = genresList,
                     moviesState = viewModel.moviesState.value,
+                    imageConfigState = viewModel.imageConfigState.value,
                     getMoviesByGenre = { genre ->
                         viewModel.getMoviesByGenre(genre)
                     })

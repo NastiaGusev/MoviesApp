@@ -26,6 +26,7 @@ import com.example.moviesapp.presentation.general.MovieGrid
 fun MoviesScreen(
     genresList: List<Genre>,
     moviesState: MoviesState,
+    imageConfigState: ImageConfigState,
     getMoviesByGenre: (Genre) -> Unit
 ) {
     Column(
@@ -57,6 +58,7 @@ fun MoviesScreen(
         moviesState.movies?.let {
             val movies = it.collectAsLazyPagingItems()
             MovieGrid(
+                imageConfigState = imageConfigState,
                 movies = movies,
                 onClick = {
                     //TODO: Add functionality for clicking movie

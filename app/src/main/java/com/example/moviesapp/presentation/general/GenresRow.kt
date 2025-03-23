@@ -17,7 +17,11 @@ import com.example.moviesapp.domain.model.Movie
 import com.example.moviesapp.presentation.MoviesState
 
 @Composable
-fun GenresRow(moviesState: MoviesState, genres: List<Genre>, onClick: (Genre) -> Unit) {
+fun GenresRow(
+    moviesState: MoviesState,
+    genres: List<Genre>,
+    onClick: (Genre) -> Unit
+) {
 
     LazyRow(modifier = Modifier) {
         items(count = genres.size) {

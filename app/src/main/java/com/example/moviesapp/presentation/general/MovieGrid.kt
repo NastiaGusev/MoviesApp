@@ -11,9 +11,15 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.example.moviesapp.domain.model.Movie
+import com.example.moviesapp.presentation.ImageConfigState
+import com.example.moviesapp.presentation.MoviesState
 
 @Composable
-fun MovieGrid(movies: LazyPagingItems<Movie>, onClick: (Movie) -> Unit) {
+fun MovieGrid(
+    imageConfigState: ImageConfigState,
+    movies: LazyPagingItems<Movie>,
+    onClick: (Movie) -> Unit
+) {
 
     val handlePagingResult = handlePagingResult(movies = movies)
     if (handlePagingResult) {
@@ -27,6 +33,7 @@ fun MovieGrid(movies: LazyPagingItems<Movie>, onClick: (Movie) -> Unit) {
             items(count = movies.itemCount) {
                 movies[it]?.let { movie ->
                     MovieCard(
+                        imageConfigState = imageConfigState,
                         movie = movie,
                         onClick = {
                             onClick(movie)
