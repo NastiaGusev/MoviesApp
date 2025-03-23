@@ -26,7 +26,7 @@ import coil.compose.AsyncImage
 import com.example.moviesapp.R
 import com.example.moviesapp.domain.model.Movie
 import com.example.moviesapp.presentation.ImageConfigState
-import com.example.moviesapp.presentation.MoviesState
+import com.example.moviesapp.util.getYearFromDate
 
 @Composable
 fun MovieCard(
@@ -72,7 +72,7 @@ fun MovieCard(
 
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = movie.release_date,
+                text = getYearFromDate(movie.release_date),
                 textAlign = TextAlign.Left,
                 style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
                 color = colorResource(R.color.lightGray)
@@ -80,3 +80,4 @@ fun MovieCard(
         }
     }
 }
+
