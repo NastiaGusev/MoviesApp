@@ -5,7 +5,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,7 +43,7 @@ import com.example.moviesapp.domain.model.Movie
 import com.example.moviesapp.presentation.general.ImageConfigState
 import com.example.moviesapp.presentation.general.ScoreCircle
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun MovieDetailsScreen(
     movie: Movie,
@@ -109,11 +110,11 @@ fun MovieDetailsScreen(
             Spacer(modifier = Modifier.height(5.dp))
 
             val genres = getGenreNamesByIds(movie.genre_ids, genres)
-            Row(
+            FlowRow(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 genres.forEach { genre ->
                     Box(
