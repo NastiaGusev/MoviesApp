@@ -1,4 +1,4 @@
-package com.example.moviesapp.presentation.movies
+package com.example.moviesapp.presentation.movies.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues

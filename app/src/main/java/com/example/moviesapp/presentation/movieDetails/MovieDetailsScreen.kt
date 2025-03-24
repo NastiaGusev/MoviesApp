@@ -1,12 +1,9 @@
 package com.example.moviesapp.presentation.movieDetails
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,10 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -42,6 +35,7 @@ import com.example.moviesapp.domain.model.Genre
 import com.example.moviesapp.domain.model.Movie
 import com.example.moviesapp.presentation.general.ImageConfigState
 import com.example.moviesapp.presentation.general.ScoreCircle
+import com.example.moviesapp.presentation.movieDetails.components.MovieGenresFlowRow
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -109,44 +103,10 @@ fun MovieDetailsScreen(
 
             Spacer(modifier = Modifier.height(5.dp))
 
-            val genres = getGenreNamesByIds(movie.genre_ids, genres)
-            FlowRow(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                genres.forEach { genre ->
-                    Box(
-                        modifier = Modifier
-                            .background(
-                                brush = Brush.horizontalGradient(
-                                    colors = listOf(
-                                        colorResource(R.color.lightGray),
-                                        colorResource(R.color.lightestGray)
-                                    )
-                                ),
-                                shape = RoundedCornerShape(15.dp)
-                            )
-                            .border(1.dp, colorResource(R.color.white), RoundedCornerShape(20.dp))
-                            .padding(horizontal = 12.dp, vertical = 6.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = genre,
-                            color = Color.White,
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                fontWeight = FontWeight.SemiBold,
-                                shadow = Shadow(
-                                    color = colorResource(R.color.lightGray),
-                                    offset = Offset(2f, 2f),
-                                    blurRadius = 3f
-                                )
-                            )
-                        )
-                    }
-                }
-            }
+            MovieGenresFlowRow(
+                genres = genres,
+                genreIds = movie.genre_ids
+            )
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -159,8 +119,4 @@ fun MovieDetailsScreen(
             )
         }
     }
-}
-
-fun getGenreNamesByIds(genreIds: List<Int>, allGenres: List<Genre>): List<String> {
-    return genreIds.mapNotNull { id -> allGenres.find { it.id == id }?.name }
 }
