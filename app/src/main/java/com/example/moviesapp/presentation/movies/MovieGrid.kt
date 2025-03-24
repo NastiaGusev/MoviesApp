@@ -1,12 +1,10 @@
-package com.example.moviesapp.presentation.general
+package com.example.moviesapp.presentation.movies
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,8 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.example.moviesapp.domain.model.Movie
-import com.example.moviesapp.presentation.ImageConfigState
-import com.example.moviesapp.presentation.MoviesState
+import com.example.moviesapp.presentation.general.ImageConfigState
 
 @Composable
 fun MovieGrid(

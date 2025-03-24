@@ -1,6 +1,5 @@
-package com.example.moviesapp.presentation
+package com.example.moviesapp.presentation.movies
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,23 +10,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.moviesapp.R
 import com.example.moviesapp.domain.model.Genre
-import com.example.moviesapp.presentation.general.GenresRow
-import com.example.moviesapp.presentation.general.MovieGrid
+import com.example.moviesapp.domain.model.Movie
+import com.example.moviesapp.presentation.general.ImageConfigState
+import com.example.moviesapp.presentation.movies.MoviesState
 
 @Composable
 fun MoviesScreen(
     genresList: List<Genre>,
     moviesState: MoviesState,
     imageConfigState: ImageConfigState,
-    getMoviesByGenre: (Genre) -> Unit
+    getMoviesByGenre: (Genre) -> Unit,
+    onClickMovie: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -60,7 +59,7 @@ fun MoviesScreen(
                 imageConfigState = imageConfigState,
                 movies = movies,
                 onClick = {
-                    //TODO: Add functionality for clicking movie
+                    onClickMovie(it.id)
                 },
             )
         }

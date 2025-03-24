@@ -1,4 +1,4 @@
-package com.example.moviesapp.presentation.general
+package com.example.moviesapp.presentation.movies
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,8 +13,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.example.moviesapp.R
 import com.example.moviesapp.domain.model.Genre
-import com.example.moviesapp.domain.model.Movie
-import com.example.moviesapp.presentation.MoviesState
+import com.example.moviesapp.presentation.movies.MoviesState
 
 @Composable
 fun GenresRow(

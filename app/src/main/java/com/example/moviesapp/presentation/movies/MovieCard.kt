@@ -1,4 +1,4 @@
-package com.example.moviesapp.presentation.general
+package com.example.moviesapp.presentation.movies
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -28,7 +28,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.moviesapp.R
 import com.example.moviesapp.domain.model.Movie
-import com.example.moviesapp.presentation.ImageConfigState
+import com.example.moviesapp.presentation.general.ImageConfigState
+import com.example.moviesapp.presentation.general.shimmerEffect
 import com.example.moviesapp.ui.theme.MoviesAppTheme
 import com.example.moviesapp.util.getYearFromDate
 

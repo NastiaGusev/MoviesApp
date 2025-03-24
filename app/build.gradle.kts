@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.serialization)
     id("kotlin-kapt")
 }
 
@@ -73,7 +74,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("androidx.core:core-splashscreen:1.0.1")
 
     //Retrofit
     implementation(libs.retrofit)
@@ -81,6 +81,7 @@ dependencies {
 
     //Compose Navigation
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 
     //Dagger hilt
     implementation(libs.hilt.android)
@@ -97,4 +98,6 @@ dependencies {
     //Accompanist
     implementation(libs.accompanist.systemuicontroller)
 
+    //Splash screen
+    implementation(libs.androidx.core.splashscreen)
 }

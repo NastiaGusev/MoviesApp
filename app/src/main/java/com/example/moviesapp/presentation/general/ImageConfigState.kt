@@ -1,4 +1,4 @@
-package com.example.moviesapp.presentation
+package com.example.moviesapp.presentation.general
 
 data class ImageConfigState(
     val baseUrl: String = "",

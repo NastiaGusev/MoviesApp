@@ -1,19 +1,22 @@
-package com.example.moviesapp.presentation
+package com.example.moviesapp.presentation.movies
 
 import android.app.Application
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.filter
 import com.example.moviesapp.domain.model.Genre
 import com.example.moviesapp.domain.repository.MoviesRepository
-import dagger.hilt.android.internal.Contexts.getApplication
+import com.example.moviesapp.presentation.general.ImageConfigState
+import com.example.moviesapp.presentation.movies.MoviesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,7 +35,7 @@ class MoviesViewModel @Inject constructor(
 
     val genres = flow {
         emit(moviesRepository.getGenres())
-    }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+    }.stateIn(viewModelScope, SharingStarted.Companion.Lazily, emptyList())
 
     init {
         getConfiguration()
@@ -42,10 +45,13 @@ class MoviesViewModel @Inject constructor(
         viewModelScope.launch {
             val config = moviesRepository.getConfiguration()
             val bestPosterSize = pickBestSize(config.poster_sizes)
+            val bestBackDropSize = pickBestSize(config.backdrop_sizes)
 
             _imageConfigState.value = ImageConfigState(
                 baseUrl = config.secure_base_url,
-                posterSize = bestPosterSize
+                posterSize = bestPosterSize,
+                backdropSize = bestBackDropSize
+
             )
         }
     }

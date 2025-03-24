@@ -1,4 +1,4 @@
-package com.example.moviesapp.presentation
+package com.example.moviesapp.presentation.movies
 
 import androidx.paging.PagingData
 import com.example.moviesapp.domain.model.Movie
