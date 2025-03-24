@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
-                MoviesNavGraph(viewModel = viewModel)
+                MoviesNavGraph(viewModel = viewModel, genresList = genresList)
             }
         }
     }

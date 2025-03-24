@@ -21,13 +21,14 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.moviesapp.R
+import com.example.moviesapp.domain.model.Genre
 import com.example.moviesapp.presentation.movieDetails.MovieDetailsScreen
 import com.example.moviesapp.presentation.movies.MoviesScreen
 import com.example.moviesapp.presentation.movies.MoviesViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun MoviesNavGraph(viewModel: MoviesViewModel) {
+fun MoviesNavGraph(viewModel: MoviesViewModel, genresList: List<Genre>) {
     val navController = rememberNavController()
     var gridState = rememberLazyGridState()
 
@@ -37,7 +38,6 @@ fun MoviesNavGraph(viewModel: MoviesViewModel) {
     ) {
 
         composable<MoviesScreenObj> {
-            val genresList = viewModel.genres.collectAsState(initial = emptyList()).value
             val coroutineScope = rememberCoroutineScope()
 
             Box(modifier = Modifier.background(colorResource(id = R.color.black))) {
@@ -58,7 +58,8 @@ fun MoviesNavGraph(viewModel: MoviesViewModel) {
                             )
                         )
                     },
-                    gridState = gridState)
+                    gridState = gridState
+                )
             }
         }
 
@@ -72,7 +73,9 @@ fun MoviesNavGraph(viewModel: MoviesViewModel) {
                 movie?.let {
                     MovieDetailsScreen(
                         movie = movie,
-                        imageConfigState = viewModel.imageConfigState.value
+                        genres = genresList,
+                        imageConfigState = viewModel.imageConfigState.value,
+                        navigateUp = { navController.navigateUp() },
                     )
                 }
             }
