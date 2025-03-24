@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,6 +31,7 @@ import coil.compose.AsyncImage
 import com.example.moviesapp.R
 import com.example.moviesapp.domain.model.Movie
 import com.example.moviesapp.presentation.general.ImageConfigState
+import com.example.moviesapp.presentation.general.ScoreCircle
 import com.example.moviesapp.presentation.general.shimmerEffect
 import com.example.moviesapp.ui.theme.MoviesAppTheme
 import com.example.moviesapp.util.getYearFromDate
@@ -40,23 +43,35 @@ fun MovieCard(
     onClick: () -> Unit
 ) {
     Column(modifier = Modifier.clickable { onClick() }) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(0.7f),
-            colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.dark_gray)),
-            shape = RoundedCornerShape(15.dp),
-            elevation = CardDefaults.cardElevation(5.dp)
-        ) {
-            AsyncImage(
-                model = "${imageConfigState.baseUrl}${imageConfigState.posterSize}${movie.poster_path}",
-                contentDescription = movie.title,
-                modifier = Modifier.fillMaxWidth(),
-                contentScale = ContentScale.FillBounds
+
+        Box(modifier = Modifier) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(0.7f),
+                colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.dark_gray)),
+                shape = RoundedCornerShape(15.dp),
+                elevation = CardDefaults.cardElevation(5.dp)
+            ) {
+                AsyncImage(
+                    model = "${imageConfigState.baseUrl}${imageConfigState.posterSize}${movie.poster_path}",
+                    contentDescription = movie.title,
+                    modifier = Modifier.fillMaxWidth(),
+                    contentScale = ContentScale.FillBounds
+                )
+            }
+
+            ScoreCircle(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(end = 2.dp)
+                    .size(50.dp)
+                    .offset(y = 15.dp),
+                voteAverage = movie.vote_average,
             )
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Column(
             modifier = Modifier

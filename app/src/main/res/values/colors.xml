@@ -10,5 +10,7 @@
     <color name="lightGray">#757575</color>
     <color name="lightestGray">#A2A2A2</color>
     <color name="dark_gray">#FF262626</color>
-    <color name="dark_orange">#FF5A2F</color>
+    <color name="score_green">#FF4CAF50</color>
+    <color name="score_yellow">#FFFFC107</color>
+    <color name="score_red">#FFF44336</color>
 </resources>

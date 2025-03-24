@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -39,6 +40,7 @@ import com.example.moviesapp.R
 import com.example.moviesapp.domain.model.Genre
 import com.example.moviesapp.domain.model.Movie
 import com.example.moviesapp.presentation.general.ImageConfigState
+import com.example.moviesapp.presentation.general.ScoreCircle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -82,6 +84,15 @@ fun MovieDetailsScreen(
                     tint = Color.White
                 )
             }
+
+            ScoreCircle(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(end = 20.dp)
+                    .size(50.dp)
+                    .offset(y = (-20).dp),
+                voteAverage = movie.vote_average,
+            )
         }
 
         Spacer(modifier = Modifier.height(20.dp))
