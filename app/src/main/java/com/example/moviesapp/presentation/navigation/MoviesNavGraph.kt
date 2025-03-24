@@ -5,10 +5,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -21,10 +24,12 @@ import com.example.moviesapp.R
 import com.example.moviesapp.presentation.movieDetails.MovieDetailsScreen
 import com.example.moviesapp.presentation.movies.MoviesScreen
 import com.example.moviesapp.presentation.movies.MoviesViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun MoviesNavGraph(viewModel: MoviesViewModel) {
     val navController = rememberNavController()
+    var gridState = rememberLazyGridState()
 
     NavHost(
         navController = navController,
@@ -33,12 +38,7 @@ fun MoviesNavGraph(viewModel: MoviesViewModel) {
 
         composable<MoviesScreenObj> {
             val genresList = viewModel.genres.collectAsState(initial = emptyList()).value
-
-            LaunchedEffect(genresList) {
-                if (genresList.isNotEmpty()) {
-                    viewModel.getMoviesByGenre(genresList.first())
-                }
-            }
+            val coroutineScope = rememberCoroutineScope()
 
             Box(modifier = Modifier.background(colorResource(id = R.color.black))) {
                 MoviesScreen(
@@ -47,6 +47,9 @@ fun MoviesNavGraph(viewModel: MoviesViewModel) {
                     imageConfigState = viewModel.imageConfigState.value,
                     getMoviesByGenre = { genre ->
                         viewModel.getMoviesByGenre(genre)
+                        coroutineScope.launch {
+                            gridState.scrollToItem(0)
+                        }
                     },
                     onClickMovie = { movieId ->
                         navController.navigate(
@@ -54,7 +57,8 @@ fun MoviesNavGraph(viewModel: MoviesViewModel) {
                                 movieId = movieId
                             )
                         )
-                    })
+                    },
+                    gridState = gridState)
             }
         }
 

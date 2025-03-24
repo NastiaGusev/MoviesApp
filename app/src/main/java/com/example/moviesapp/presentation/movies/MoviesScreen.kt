@@ -6,8 +6,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -19,6 +23,7 @@ import com.example.moviesapp.domain.model.Genre
 import com.example.moviesapp.domain.model.Movie
 import com.example.moviesapp.presentation.general.ImageConfigState
 import com.example.moviesapp.presentation.movies.MoviesState
+import kotlinx.coroutines.launch
 
 @Composable
 fun MoviesScreen(
@@ -26,7 +31,8 @@ fun MoviesScreen(
     moviesState: MoviesState,
     imageConfigState: ImageConfigState,
     getMoviesByGenre: (Genre) -> Unit,
-    onClickMovie: (Int) -> Unit
+    onClickMovie: (Int) -> Unit,
+    gridState: LazyGridState
 ) {
     Column(
         modifier = Modifier
@@ -61,7 +67,9 @@ fun MoviesScreen(
                 onClick = {
                     onClickMovie(it.id)
                 },
+                gridState = gridState
             )
         }
     }
 }
+

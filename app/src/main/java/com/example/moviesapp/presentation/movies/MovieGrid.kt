@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,12 +19,14 @@ import com.example.moviesapp.presentation.general.ImageConfigState
 fun MovieGrid(
     imageConfigState: ImageConfigState,
     movies: LazyPagingItems<Movie>,
-    onClick: (Movie) -> Unit
+    onClick: (Movie) -> Unit,
+    gridState: LazyGridState
 ) {
 
     val handlePagingResult = handlePagingResult(movies = movies)
     if (handlePagingResult) {
         LazyVerticalGrid(
+            state = gridState,
             columns = GridCells.Fixed(2),
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(8.dp),

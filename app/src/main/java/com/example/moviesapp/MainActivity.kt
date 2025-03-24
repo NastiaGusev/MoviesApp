@@ -32,6 +32,13 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val viewModel: MoviesViewModel = hiltViewModel()
+            val genresList = viewModel.genres.collectAsState(initial = emptyList()).value
+
+            LaunchedEffect(genresList) {
+                if (genresList.isNotEmpty()) {
+                    viewModel.getMoviesByGenre(genresList.first())
+                }
+            }
 
             MoviesAppTheme {
                 val systemController = rememberSystemUiController()
