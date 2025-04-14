@@ -37,6 +37,14 @@ class MoviesViewModel @Inject constructor(
         emit(moviesRepository.getGenres())
     }.stateIn(viewModelScope, SharingStarted.Companion.Lazily, emptyList())
 
+    fun getMoviesByGenre(genre: Genre) {
+        _moviesState.value = moviesState.value.copy(genreId = genre.id)
+        val movies = moviesRepository.getMovies(
+            genreId = moviesState.value.genreId
+        ).cachedIn(viewModelScope)
+        _moviesState.value = moviesState.value.copy(movies = movies)
+    }
+
     init {
         getConfiguration()
     }
@@ -65,11 +73,5 @@ class MoviesViewModel @Inject constructor(
         return "w${optimalSize ?: numericSizes.first()}"
     }
 
-    fun getMoviesByGenre(genre: Genre) {
-        _moviesState.value = moviesState.value.copy(genreId = genre.id)
-        val movies = moviesRepository.getMovies(
-            genreId = moviesState.value.genreId
-        ).cachedIn(viewModelScope)
-        _moviesState.value = moviesState.value.copy(movies = movies)
-    }
+
 }
