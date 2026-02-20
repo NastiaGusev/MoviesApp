@@ -30,9 +30,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.domain.model.Genre
+import com.example.domain.model.Movie
 import com.example.moviesapp.R
-import com.example.moviesapp.domain.model.Genre
-import com.example.moviesapp.domain.model.Movie
 import com.example.moviesapp.presentation.general.ImageConfigState
 import com.example.moviesapp.presentation.general.ScoreCircle
 import com.example.moviesapp.presentation.movieDetails.components.MovieGenresFlowRow
@@ -56,7 +56,7 @@ fun MovieDetailsScreen(
                 .background(colorResource(R.color.black))
         ) {
             AsyncImage(
-                model = "${imageConfigState.baseUrl}${imageConfigState.backdropSize}${movie.backdrop_path}",
+                model = "${imageConfigState.baseUrl}${imageConfigState.backdropSize}${movie.backdropPath}",
                 contentDescription = movie.title,
                 modifier = Modifier
                     .wrapContentWidth()
@@ -86,7 +86,7 @@ fun MovieDetailsScreen(
                     .padding(end = 20.dp)
                     .size(50.dp)
                     .offset(y = (-20).dp),
-                voteAverage = movie.vote_average,
+                voteAverage = movie.voteAverage,
             )
         }
 
@@ -105,7 +105,7 @@ fun MovieDetailsScreen(
 
             MovieGenresFlowRow(
                 genres = genres,
-                genreIds = movie.genre_ids
+                genreIds = movie.genreIds
             )
 
             Spacer(modifier = Modifier.height(10.dp))

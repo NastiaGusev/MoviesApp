@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.moviesapp.domain.model.Genre
+import com.example.domain.model.Genre
 import com.example.moviesapp.presentation.general.ImageConfigState
 import com.example.moviesapp.presentation.movies.components.GenresRow
 import com.example.moviesapp.presentation.movies.components.MovieGrid

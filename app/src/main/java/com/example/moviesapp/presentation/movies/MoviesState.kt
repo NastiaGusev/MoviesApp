@@ -1,7 +1,7 @@
 package com.example.moviesapp.presentation.movies
 
 import androidx.paging.PagingData
-import com.example.moviesapp.domain.model.Movie
+import com.example.domain.model.Movie
 import kotlinx.coroutines.flow.Flow
 
 data class MoviesState(

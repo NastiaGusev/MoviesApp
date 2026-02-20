@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import com.example.domain.model.Genre
 import com.example.moviesapp.R
-import com.example.moviesapp.domain.model.Genre
 import com.example.moviesapp.presentation.movies.MoviesState
 
 @Composable

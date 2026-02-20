@@ -21,8 +21,8 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.domain.model.Genre
 import com.example.moviesapp.R
-import com.example.moviesapp.domain.model.Genre
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

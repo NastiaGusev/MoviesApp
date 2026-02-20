@@ -3,18 +3,13 @@ package com.example.moviesapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
-
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavGraph
-
 import com.example.moviesapp.presentation.movies.MoviesViewModel
 import com.example.moviesapp.presentation.navigation.MoviesNavGraph
 import com.example.moviesapp.ui.theme.MoviesAppTheme

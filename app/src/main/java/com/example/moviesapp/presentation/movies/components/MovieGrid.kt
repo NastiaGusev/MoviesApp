@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.example.moviesapp.domain.model.Movie
+import com.example.domain.model.Movie
 import com.example.moviesapp.presentation.general.ImageConfigState
 
 @Composable

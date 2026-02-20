@@ -5,18 +5,13 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.filter
-import com.example.moviesapp.domain.model.Genre
-import com.example.moviesapp.domain.repository.MoviesRepository
+import com.example.domain.model.Genre
+import com.example.domain.repository.MoviesRepository
 import com.example.moviesapp.presentation.general.ImageConfigState
-import com.example.moviesapp.presentation.movies.MoviesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -52,11 +47,11 @@ class MoviesViewModel @Inject constructor(
     private fun getConfiguration() {
         viewModelScope.launch {
             val config = moviesRepository.getConfiguration()
-            val bestPosterSize = pickBestSize(config.poster_sizes)
-            val bestBackDropSize = pickBestSize(config.backdrop_sizes)
+            val bestPosterSize = pickBestSize(config.posterSizes)
+            val bestBackDropSize = pickBestSize(config.backdropSizes)
 
             _imageConfigState.value = ImageConfigState(
-                baseUrl = config.secure_base_url,
+                baseUrl = config.secureBaseUrl,
                 posterSize = bestPosterSize,
                 backdropSize = bestBackDropSize
 

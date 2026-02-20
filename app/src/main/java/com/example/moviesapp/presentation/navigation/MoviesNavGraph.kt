@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -13,8 +12,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.domain.model.Genre
 import com.example.moviesapp.R
-import com.example.moviesapp.domain.model.Genre
 import com.example.moviesapp.presentation.movieDetails.MovieDetailsScreen
 import com.example.moviesapp.presentation.movies.MoviesScreen
 import com.example.moviesapp.presentation.movies.MoviesViewModel

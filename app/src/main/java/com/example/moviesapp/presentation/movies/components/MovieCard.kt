@@ -28,8 +28,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.domain.model.Movie
 import com.example.moviesapp.R
-import com.example.moviesapp.domain.model.Movie
 import com.example.moviesapp.presentation.general.ImageConfigState
 import com.example.moviesapp.presentation.general.ScoreCircle
 import com.example.moviesapp.presentation.general.shimmerEffect
@@ -54,7 +54,7 @@ fun MovieCard(
                 elevation = CardDefaults.cardElevation(5.dp)
             ) {
                 AsyncImage(
-                    model = "${imageConfigState.baseUrl}${imageConfigState.posterSize}${movie.poster_path}",
+                    model = "${imageConfigState.baseUrl}${imageConfigState.posterSize}${movie.posterPath}",
                     contentDescription = movie.title,
                     modifier = Modifier.fillMaxWidth(),
                     contentScale = ContentScale.FillBounds
@@ -67,7 +67,7 @@ fun MovieCard(
                     .padding(end = 2.dp)
                     .size(50.dp)
                     .offset(y = 15.dp),
-                voteAverage = movie.vote_average,
+                voteAverage = movie.voteAverage,
             )
         }
 
@@ -92,7 +92,7 @@ fun MovieCard(
 
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = getYearFromDate(movie.release_date),
+                text = getYearFromDate(movie.releaseDate),
                 textAlign = TextAlign.Left,
                 style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
                 color = colorResource(R.color.lightGray)
